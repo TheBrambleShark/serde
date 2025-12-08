@@ -66,8 +66,6 @@ namespace Serde.FixedWidth
                 return false;
             }
 
-            string format;
-
             if (!TryGetNamedArgumentValue(customAttribute, 0, out int offset))
             {
                 return false;
@@ -78,11 +76,9 @@ namespace Serde.FixedWidth
                 return false;
             }
 
-            if (!TryGetNamedArgumentValue(customAttribute, 2, out string? formatValue))
-            {
-                format = string.Empty;
-            }
-            format = formatValue ?? string.Empty;
+            string format = TryGetNamedArgumentValue(customAttribute, 2, out string? formatValue)
+                ? formatValue
+                : string.Empty;
 
             if (!TryGetNamedArgumentValue(customAttribute, 3, out FieldOverflowHandling fieldOverflowHandling))
             {

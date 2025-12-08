@@ -106,7 +106,7 @@ namespace Serde.FixedWidth
         /// <returns>An enumerable of deserialized rows.</returns>
         public static IEnumerable<T> DeserializeDocument<T>(string document, IDeserialize<T> d, int headerLines = 0)
         {
-            foreach (var line in document.Split(Environment.NewLine).Skip(headerLines))
+            foreach (var line in document.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries).Skip(headerLines))
             {
                 yield return Deserialize(line, d);
             }
